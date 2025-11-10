@@ -15,3 +15,12 @@ class Transfer extends Model
         'date',
     ];
 }
+public function compte()
+{
+    return $this->belongsTo(Compte::class);
+}
+
+public function detailsTransaction()
+{
+    return $this->hasOne(DetailsTransaction::class);
+}
