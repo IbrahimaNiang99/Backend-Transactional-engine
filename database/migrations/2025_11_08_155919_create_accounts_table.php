@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('balance')->default(0);
             $table->string('account_number')->unique();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
         });
     }

@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('cni')->unique();
             $table->string('password');
+            $table->boolean('has_verified_phone')->default(false);
+            $table->string('phone_verification_code')->nullable();
+            $table->timestamp('phone_verification_expires_at')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

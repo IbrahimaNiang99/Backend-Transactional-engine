@@ -1,11 +1,28 @@
 <?php
 
 namespace App\Models;
-
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     title="User",
+ *     required={"first_name", "last_name", "phone", "cni", "password"},
+ *     @OA\Property(property="id", type="integer", format="int64", description="ID de l'utilisateur"),
+ *     @OA\Property(property="first_name", type="string", description="Prénom de l'utilisateur"),
+ *     @OA\Property(property="last_name", type="string", description="Nom de l'utilisateur"),
+ *     @OA\Property(property="phone", type="string", description="Numéro de téléphone de l'utilisateur"),
+ *     @OA\Property(property="cni", type="string", description="Numéro de la carte d'identité nationale"),
+ *     @OA\Property(property="has_verified_phone", type="boolean", description="Indique si le téléphone est vérifié"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Date de création"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date de mise à jour")
+ * )
+ */
+
 
 class User extends Authenticatable
 {
@@ -23,6 +40,8 @@ class User extends Authenticatable
         'phone',
         'cni',
         'password',
+        'phone_verification_code',
+        'phone_verification_expires_at',
     ];
 
     /**
