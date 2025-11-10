@@ -65,11 +65,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-public function comptes()
-{
-    return $this->hasMany(Compte::class);
-}
- // 🔗 Un compte appartient à un utilisateur
+    public function comptes()
+    {
+        return $this->hasMany(Compte::class);
+    }
+    // 🔗 Un compte appartient à un utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -78,18 +78,18 @@ public function comptes()
     // 🔗 Un compte peut avoir plusieurs transferts
     public function transferts()
     {
-        return $this->hasMany(Transfert::class);
+        return $this->hasMany(Transfer::class);
     }
 
     // 🔗 Un compte peut émettre plusieurs transactions
     public function transactionsEmises()
     {
-        return $this->hasMany(DetailsTransaction::class, 'compte_emetteur');
+        return $this->hasMany(TransactionDetail::class, 'compte_emetteur');
     }
 
     // 🔗 Un compte peut recevoir plusieurs transactions
     public function transactionsRecues()
     {
-        return $this->hasMany(DetailsTransaction::class, 'compte_recepteur');
+        return $this->hasMany(TransactionDetail::class, 'compte_recepteur');
     }
 }

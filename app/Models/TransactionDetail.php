@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property int $transfer_id
+ * @property int $sender_account_id
+ * @property int $receiver_account_id
+ */
 class TransactionDetail extends Model
 {
     use HasFactory, SoftDeletes;
@@ -15,19 +21,28 @@ class TransactionDetail extends Model
         'sender_account_id',
         'receiver_account_id',
     ];
-        // 🔗 Compte émetteur
-}
-public function compteEmetteur()
-{
-    return $this->belongsTo(Compte::class, 'compte_emetteur');
-}
- // 🔗 Compte récepteur
-public function compteRecepteur()
-{
-    return $this->belongsTo(Compte::class, 'compte_recepteur');
-}
-// 🔗 Détail lié à un transfert
-    public function transfert()
+
+    /**
+     * Get the sender account for the transaction detail.
+     */
+    public function senderAccount()
     {
-        return $this->belongsTo(Transfert::class);
+        return $this->belongsTo(Compte::class, 'sender_account_id');
     }
+    
+    /**
+     * Get the receiver account for the transaction detail.
+     */
+    public function receiverAccount()
+    {
+        return $this->belongsTo(Compte::class, 'receiver_account_id');
+    }
+
+    /**
+     * Get the transfer associated with the transaction detail.
+     */
+    public function transfer()
+    {
+        return $this->belongsTo(Transfer::class);
+    }
+}
